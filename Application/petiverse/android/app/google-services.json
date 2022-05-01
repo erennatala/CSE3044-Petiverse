@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "45173343678",
+    "project_id": "petiverse-7d9f4",
+    "storage_bucket": "petiverse-7d9f4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:45173343678:android:ab48f99caa3dcca54665ef",
+        "android_client_info": {
+          "package_name": "com.example.petiverse"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "45173343678-lbaos27qpfbak3bc7urhmgsa19t2538o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDPNym1KL9xqZ2iQimy8DJGNyynh20M7uM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "45173343678-lbaos27qpfbak3bc7urhmgsa19t2538o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
