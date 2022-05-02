@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-//import 'package:petiverse/screens/account/account_redirect_page.dart';
+import 'package:petiverse/screens/account/account_redirect_page.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class InfoPage extends StatefulWidget {
@@ -56,7 +56,7 @@ class _InfoPageState extends State<InfoPage> {
                   'assets/images/help-ad.png',
                   'Help the animals in need',
                   'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-                  Color(0xFFc4cc22),
+                  Color.fromARGB(255, 112, 4, 129),
                   height,
                   width,
                 ),
@@ -87,8 +87,8 @@ class _InfoPageState extends State<InfoPage> {
       margin: EdgeInsets.only(bottom: 15),
       child: ElevatedButton(
         onPressed: () {
-          //  Navigator.pushReplacement(
-          //    context, CupertinoPageRoute(builder: (context) => ARPage()));
+          Navigator.pushReplacement(context,
+              CupertinoPageRoute(builder: (context) => AccountRedirectPage()));
         },
         child: Text(
           "Let's Begin",
@@ -118,14 +118,24 @@ class _InfoPageState extends State<InfoPage> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
+          Divider(
+            thickness: 0,
+            height: 30,
+            color: color,
+          ),
           Center(
             child: SizedBox(
               width: width,
-              height: height * 0.49,
+              height: height * 0.35,
               child: Image.asset(
                 imgRoute,
               ),
             ),
+          ),
+          Divider(
+            thickness: 0,
+            height: 35,
+            color: color,
           ),
           Text(
             title,
@@ -137,9 +147,8 @@ class _InfoPageState extends State<InfoPage> {
           ),
           Divider(
             thickness: 0,
-            height: 20,
+            height: 10,
             color: color,
-            endIndent: 175,
           ),
           Container(
             padding: EdgeInsets.symmetric(

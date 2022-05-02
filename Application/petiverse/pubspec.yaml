@@ -48,6 +48,11 @@ dev_dependencies:
   flutter_lints: ^1.0.0
   smooth_page_indicator: 
   provider:
+  google_fonts:
+  flutter_icons:
+  cloud_firestore:
+  firebase_auth:
+  email_validator:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
