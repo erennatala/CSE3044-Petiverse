@@ -1,6 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:petiverse/screens/home/AdoptionProclomationPage.dart';
+import 'package:petiverse/screens/home/ForumPage.dart';
+import 'package:petiverse/screens/home/HelpProclomationPage.dart';
+import 'package:petiverse/screens/home/MatingProclomationPage.dart';
+import 'package:petiverse/screens/home/SharingPage.dart';
 import 'package:petiverse/utilities/navigation_drawer.dart';
 import 'package:petiverse/services/back_end.dart';
 import 'package:petiverse/utilities/white_appbar.dart';
@@ -17,7 +22,8 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  int _selectedIndex = 1;
+  int _selectedIndex = 0;
+  List adoptionAds = [], matingAds = [], helpAds = [], forumQuestions = [];
 
   PageController pageController = PageController();
   List<Color> colors = [
@@ -25,11 +31,24 @@ class _MainPageState extends State<MainPage> {
     const Color(0xFFEB5644),
     const Color(0xFF37bff0),
     const Color(0xFFc4cc22),
+    Color.fromARGB(255, 69, 3, 74),
   ];
   Color _backgroundColor = Color(0xFFEB5644);
 
   fetchFileData() async {
-    List<Widget> screens = [];
+    adoptionAds = await BackEndServices().getAdoptionAdsFromFirebase();
+    matingAds = await BackEndServices().getMatingAdsFromFirebase();
+    List<Widget> screens = [
+      AdoptionProclamationPage(
+        adoptionAds: adoptionAds,
+      ),
+      MatingProclamationPage(
+        matingAds: matingAds,
+      ),
+      SharingPage(),
+      HelpProclamationPage(),
+      ForumPage()
+    ];
     return screens;
   }
 
@@ -55,6 +74,7 @@ class _MainPageState extends State<MainPage> {
             return Scaffold(
               drawer: NavigationDrawer(),
               backgroundColor: Colors.white,
+              body: data[_selectedIndex],
               bottomNavigationBar: buildBottomBar(),
             );
           }
@@ -138,42 +158,6 @@ class _MainPageState extends State<MainPage> {
       // inorder to display something on the Canvas
       future: fetchFileData(),
     );
-    /* List<Widget> screens = [
-      NavBarHome(
-        email: widget.email,
-        savedJobs: widget.savedJobs,
-        learnList: widget.courseList,
-        earnList: widget.companyList,
-        allJobs: widget.allJobs,
-      ),
-      NavBarMatch(
-        email: widget.email,
-        savedJobs: widget.savedJobs,
-        learnList: widget.courseList,
-        earnList: widget.companyList,
-        filteredJobs: widget.filteredJobs,
-      ),
-      NavBarLearn(
-        email: widget.email,
-        learnList: widget.courseList,
-        savedJobs: widget.savedJobs,
-        savedCourses: savedCourses1,
-      ),
-      NavBarEarn(
-        email: widget.email,
-        earnList: widget.companyList,
-        savedSites: savedSites1,
-        savedJobs: widget.savedJobs,
-      ),
-    ]; */
-    /* return Scaffold(
-      drawer: NavigationDrawer(
-        email: widget.email,
-      ),
-      backgroundColor: Colors.white,
-      body: screens[_selectedIndex],
-      bottomNavigationBar: buildBottomBar(),
-    ); */
   }
 
   Widget buildBottomBar() {
