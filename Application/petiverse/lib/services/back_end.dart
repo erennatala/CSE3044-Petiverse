@@ -20,4 +20,12 @@ class BackEndServices {
     final allMatingAds = snapshot.docs.map((doc) => doc.data()).toList();
     return allMatingAds;
   }
+
+  //GET SERVICE FOR HELP ADS
+  Future<List> getHelpAdsFromFirebase() async {
+    CollectionReference col = _instance.collection('Help Ads');
+    QuerySnapshot snapshot = await col.get();
+    final allHelpAds = snapshot.docs.map((doc) => doc.data()).toList();
+    return allHelpAds;
+  }
 }
