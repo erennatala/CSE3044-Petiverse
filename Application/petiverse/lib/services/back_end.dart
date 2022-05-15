@@ -28,4 +28,12 @@ class BackEndServices {
     final allHelpAds = snapshot.docs.map((doc) => doc.data()).toList();
     return allHelpAds;
   }
+
+  //GET SERVICE FOR FORUM QUESTIONS
+  Future<List> getForumQuestionsFromFirebase() async {
+    CollectionReference col = _instance.collection('Forum Questions');
+    QuerySnapshot snapshot = await col.get();
+    final allForumQuestions = snapshot.docs.map((doc) => doc.data()).toList();
+    return allForumQuestions;
+  }
 }

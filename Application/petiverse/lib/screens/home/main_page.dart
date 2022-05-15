@@ -39,6 +39,7 @@ class _MainPageState extends State<MainPage> {
     adoptionAds = await BackEndServices().getAdoptionAdsFromFirebase();
     matingAds = await BackEndServices().getMatingAdsFromFirebase();
     helpAds = await BackEndServices().getHelpAdsFromFirebase();
+    forumQuestions = await BackEndServices().getForumQuestionsFromFirebase();
     List<Widget> screens = [
       AdoptionProclamationPage(
         adoptionAds: adoptionAds,
@@ -50,7 +51,9 @@ class _MainPageState extends State<MainPage> {
       HelpProclamationPage(
         helpAds: helpAds,
       ),
-      ForumPage()
+      ForumPage(
+        forumQuestions: forumQuestions,
+      )
     ];
     return screens;
   }
