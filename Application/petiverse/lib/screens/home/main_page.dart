@@ -38,6 +38,8 @@ class _MainPageState extends State<MainPage> {
   fetchFileData() async {
     adoptionAds = await BackEndServices().getAdoptionAdsFromFirebase();
     matingAds = await BackEndServices().getMatingAdsFromFirebase();
+    helpAds = await BackEndServices().getHelpAdsFromFirebase();
+    forumQuestions = await BackEndServices().getForumQuestionsFromFirebase();
     List<Widget> screens = [
       AdoptionProclamationPage(
         adoptionAds: adoptionAds,
@@ -46,8 +48,12 @@ class _MainPageState extends State<MainPage> {
         matingAds: matingAds,
       ),
       SharingPage(),
-      HelpProclamationPage(),
-      ForumPage()
+      HelpProclamationPage(
+        helpAds: helpAds,
+      ),
+      ForumPage(
+        forumQuestions: forumQuestions,
+      )
     ];
     return screens;
   }

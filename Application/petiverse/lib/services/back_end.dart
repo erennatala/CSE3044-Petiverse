@@ -36,6 +36,22 @@ class BackEndServices {
     return allMatingAds;
   }
 
+  //GET SERVICE FOR HELP ADS
+  Future<List> getHelpAdsFromFirebase() async {
+    CollectionReference col = _instance.collection('Help Ads');
+    QuerySnapshot snapshot = await col.get();
+    final allHelpAds = snapshot.docs.map((doc) => doc.data()).toList();
+    return allHelpAds;
+  }
+
+  //GET SERVICE FOR FORUM QUESTIONS
+  Future<List> getForumQuestionsFromFirebase() async {
+    CollectionReference col = _instance.collection('Forum Questions');
+    QuerySnapshot snapshot = await col.get();
+    final allForumQuestions = snapshot.docs.map((doc) => doc.data()).toList();
+    return allForumQuestions;
+  }
+
   //POST MOCK DATAS FOR TEST TO FIREBASE
   Future<void> addTestDatasToFirebase(
       String communicationNumber,
