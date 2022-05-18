@@ -4,6 +4,8 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'package:petiverse/screens/account/account_create_page.dart';
 import 'package:petiverse/screens/account/sign_in_page.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:petiverse/services/back_end.dart';
+import 'package:intl/intl.dart';
 
 // AR = Account Redirect
 class AccountRedirectPage extends StatelessWidget {
@@ -13,6 +15,8 @@ class AccountRedirectPage extends StatelessWidget {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
+    DateTime now = DateTime.now();
+    String formattedDate = DateFormat('kk:mm:ss \n EEE d MMM').format(now);
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 255, 255, 255),
       body: SingleChildScrollView(
@@ -106,7 +110,22 @@ class AccountRedirectPage extends StatelessWidget {
                   Container(
                       child: TextButton(
                     //We can change this to gesture detector.
-                    onPressed: () {
+                    onPressed: () async {
+                      for (int i = 0; i < 50; i++) {
+                        await BackEndServices().addTestDatasToFirebase(
+                            "+905555555555",
+                            formattedDate,
+                            "This is " + i.toString() + ". mock ad for testing",
+                            "All healty",
+                            "Test Age",
+                            "Test Type",
+                            "Test Breed",
+                            "Test Gender",
+                            "This is " +
+                                i.toString() +
+                                ". mock title for testing",
+                            "Test user");
+                      }
                       Navigator.push(
                           context,
                           CupertinoPageRoute(
