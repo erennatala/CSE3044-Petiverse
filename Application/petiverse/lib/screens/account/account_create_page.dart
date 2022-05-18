@@ -405,7 +405,8 @@ class _AccountCreatePageState extends State<AccountCreatePage> {
                         createAccountWithEmailAndPassword(_email, _password);
                       }
                       //TODO: DONT LET THE USER TO SIGN UP IF HE/SHE IS YOUNGER THAN 18
-                      addUserDocumentToFireStore(_name, _email, _gender, DOB);
+                      BackEndServices().addUserDocumentToFireStore(
+                          _name, _email, _gender, DOB);
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                         content: const Text(
                             'Your account has been created, check your mail box for confirmation e-mail.'),
@@ -546,20 +547,6 @@ class _AccountCreatePageState extends State<AccountCreatePage> {
       ],
     );
   }
-}
-
-Future<void> addUserDocumentToFireStore(
-    String name, String email, String gender, String DOB) async {
-  Map<String, dynamic> userInfoJSON = Map();
-  userInfoJSON['Name'] = name;
-  userInfoJSON['E-mail'] = email;
-  userInfoJSON['Gender'] = gender;
-  userInfoJSON['Birth Date'] = DOB;
-  _firestore
-      .collection("users")
-      .doc(email)
-      .set(userInfoJSON)
-      .then((v) => print("User data is added to firestore"));
 }
 
 void createAccountWithEmailAndPassword(String email, password) async {
