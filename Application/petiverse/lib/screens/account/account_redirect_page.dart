@@ -111,21 +111,6 @@ class AccountRedirectPage extends StatelessWidget {
                       child: TextButton(
                     //We can change this to gesture detector.
                     onPressed: () async {
-                      for (int i = 0; i < 50; i++) {
-                        await BackEndServices().addTestDatasToFirebase(
-                            "+905555555555",
-                            formattedDate,
-                            "This is " + i.toString() + ". mock ad for testing",
-                            "All healty",
-                            "Test Age",
-                            "Test Type",
-                            "Test Breed",
-                            "Test Gender",
-                            "This is " +
-                                i.toString() +
-                                ". mock title for testing",
-                            "Test user");
-                      }
                       Navigator.push(
                           context,
                           CupertinoPageRoute(
