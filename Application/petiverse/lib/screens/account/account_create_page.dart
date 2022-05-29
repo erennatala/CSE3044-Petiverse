@@ -404,7 +404,7 @@ class _AccountCreatePageState extends State<AccountCreatePage> {
                         // if so then create the user
                         createAccountWithEmailAndPassword(_email, _password);
                       }
-                      //TODO: DONT LET THE USER TO SIGN UP IF HE/SHE IS YOUNGER THAN 18
+                      // TO DO : DONT LET THE USER TO SIGN UP IF HE/SHE IS YOUNGER THAN 18
                       BackEndServices().addUserDocumentToFireStore(
                           _name, _email, _gender, DOB);
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(

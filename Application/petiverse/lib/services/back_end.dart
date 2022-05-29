@@ -8,15 +8,15 @@ class BackEndServices {
   //SAVE USER TO FIREBASE
   Future<void> addUserDocumentToFireStore(
       String name, String email, String gender, String DOB) async {
-    Map<String, dynamic> userInfoJSON = Map();
-    userInfoJSON['Name'] = name;
-    userInfoJSON['E-mail'] = email;
-    userInfoJSON['Gender'] = gender;
-    userInfoJSON['Birth Date'] = DOB;
+    Map<String, dynamic> mockData = Map();
+    mockData['Name'] = name;
+    mockData['E-mail'] = email;
+    mockData['Gender'] = gender;
+    mockData['Birth Date'] = DOB;
     _instance
         .collection("users")
         .doc(email)
-        .set(userInfoJSON)
+        .set(mockData)
         .then((v) => print("User data is added to firestore"));
   }
 
@@ -63,18 +63,20 @@ class BackEndServices {
       String petsBreed,
       String petsGender,
       String title,
-      String owner) async {
-    Map<String, dynamic> userInfoJSON = Map();
-    userInfoJSON['Title'] = title;
-    userInfoJSON['Pet\'s Type'] = petsType;
-    userInfoJSON['Pet\'s Age'] = petsAge;
-    userInfoJSON['Owner'] = owner;
-    userInfoJSON['Communication Number'] = communicationNumber;
-    userInfoJSON['Disease'] = disease;
-    userInfoJSON['Detailed Description'] = detailedDescription;
-    userInfoJSON['Pet\'s Gender'] = petsGender;
-    userInfoJSON['Pet\'s Breed'] = petsBreed;
-    userInfoJSON['Date'] = date;
-    _instance.collection("Forum Questions").add(userInfoJSON);
+      String owner,
+      List comments) async {
+    Map<String, dynamic> mockData = Map();
+    mockData['Title'] = title;
+    mockData['Pet\'s Type'] = petsType;
+    mockData['Pet\'s Age'] = petsAge;
+    mockData['Owner'] = owner;
+    mockData['Communication Number'] = communicationNumber;
+    mockData['Disease'] = disease;
+    mockData['Detailed Description'] = detailedDescription;
+    mockData['Pet\'s Gender'] = petsGender;
+    mockData['Pet\'s Breed'] = petsBreed;
+    mockData['Date'] = date;
+    mockData['Comments'] = comments;
+    _instance.collection("Forum Questions").add(mockData);
   }
 }

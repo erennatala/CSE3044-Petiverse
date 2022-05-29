@@ -40,6 +40,7 @@ class _MainPageState extends State<MainPage> {
     matingAds = await BackEndServices().getMatingAdsFromFirebase();
     helpAds = await BackEndServices().getHelpAdsFromFirebase();
     forumQuestions = await BackEndServices().getForumQuestionsFromFirebase();
+
     List<Widget> screens = [
       AdoptionProclamationPage(
         adoptionAds: adoptionAds,

@@ -1,5 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:petiverse/model/help_proclomation_model.dart';
+import 'package:petiverse/screens/home/detail_pages/help_proclomation_detail.dart';
 
 class HelpProclamationPage extends StatefulWidget {
   final List helpAds;
@@ -35,6 +37,15 @@ class HelpProclamationPageState extends State<HelpProclamationPage> {
                     child: const Text("Image"),
                   ),
                   trailing: Text("sasa"),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      CupertinoPageRoute(
+                        builder: (context) =>
+                            HelpProclomationDetailPage(selectedProclomation: e),
+                      ),
+                    );
+                  },
                 ))
             .toList(),
       ),

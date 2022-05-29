@@ -1,5 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:petiverse/model/adoption_proclomation_model.dart';
+import 'package:petiverse/screens/home/detail_pages/adoption_proclomation_detail.dart';
 
 class AdoptionProclamationPage extends StatefulWidget {
   final List adoptionAds;
@@ -38,6 +40,15 @@ class AdoptionProclamationPageState extends State<AdoptionProclamationPage> {
                     child: const Text("Image"),
                   ),
                   trailing: Text("sasa"),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      CupertinoPageRoute(
+                        builder: (context) => AdoptionProclomationDetailPage(
+                            selectedProclomation: e),
+                      ),
+                    );
+                  },
                 ))
             .toList(),
       ),

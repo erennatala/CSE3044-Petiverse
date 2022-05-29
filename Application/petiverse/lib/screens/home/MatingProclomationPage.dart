@@ -1,5 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:petiverse/model/mating_proclomation_model.dart';
+import 'package:petiverse/screens/home/detail_pages/mating_proclomation_detail.dart';
 
 class MatingProclamationPage extends StatefulWidget {
   final List matingAds;
@@ -36,6 +38,15 @@ class MatingProclamationPageState extends State<MatingProclamationPage> {
                     child: const Text("Image"),
                   ),
                   trailing: Text("sasa"),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      CupertinoPageRoute(
+                        builder: (context) => MatingProclomationDetailPage(
+                            selectedProclomation: e),
+                      ),
+                    );
+                  },
                 ))
             .toList(),
       ),
