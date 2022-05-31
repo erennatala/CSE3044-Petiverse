@@ -52,6 +52,32 @@ class BackEndServices {
     return allForumQuestions;
   }
 
+  //POST SERVICE FOR ADOPTION ADS
+  Future<void> addAdoptionAdToFireStore(
+      String _title,
+      String _detailedDescription,
+      String _petsAge,
+      String _petsType,
+      String _petsBreed,
+      String _diseaseInfo,
+      String _ownerName,
+      String _petsGender,
+      String _communicationNumber,
+      String shareDate) async {
+    Map<String, dynamic> ad = Map();
+    ad['Title'] = _title;
+    ad['Pet\'s Type'] = _petsType;
+    ad['Pet\'s Age'] = _petsAge;
+    ad['Owner'] = _ownerName;
+    ad['Communication Number'] = _communicationNumber;
+    ad['Disease'] = _diseaseInfo;
+    ad['Detailed Description'] = _detailedDescription;
+    ad['Pet\'s Gender'] = _petsGender;
+    ad['Pet\'s Breed'] = _petsBreed;
+    ad['Date'] = shareDate;
+    _instance.collection("Adoption Ads").add(ad);
+  }
+
   //POST MOCK DATAS FOR TEST TO FIREBASE
   Future<void> addTestDatasToFirebase(
       String communicationNumber,
