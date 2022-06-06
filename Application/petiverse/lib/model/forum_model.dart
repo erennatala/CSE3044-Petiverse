@@ -7,6 +7,7 @@ class ForumModel {
   final String detailedDescription;
   final String petBreed;
   final String communicationNumber;
+  final String petGender;
   final String date;
   final List<dynamic> comments;
   ForumModel(
@@ -18,6 +19,7 @@ class ForumModel {
       this.detailedDescription,
       this.petBreed,
       this.communicationNumber,
+      this.petGender,
       this.date,
       this.comments);
 }

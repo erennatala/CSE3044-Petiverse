@@ -78,6 +78,84 @@ class BackEndServices {
     _instance.collection("Adoption Ads").add(ad);
   }
 
+  //POST SERVICE FOR MATING ADS
+  Future<void> addMatingAdToFireStore(
+      String _title,
+      String _detailedDescription,
+      String _petsAge,
+      String _petsType,
+      String _petsBreed,
+      String _diseaseInfo,
+      String _ownerName,
+      String _petsGender,
+      String _communicationNumber,
+      String shareDate) async {
+    Map<String, dynamic> ad = Map();
+    ad['Title'] = _title;
+    ad['Pet\'s Type'] = _petsType;
+    ad['Pet\'s Age'] = _petsAge;
+    ad['Owner'] = _ownerName;
+    ad['Communication Number'] = _communicationNumber;
+    ad['Disease'] = _diseaseInfo;
+    ad['Detailed Description'] = _detailedDescription;
+    ad['Pet\'s Gender'] = _petsGender;
+    ad['Pet\'s Breed'] = _petsBreed;
+    ad['Date'] = shareDate;
+    _instance.collection("Mating Ads").add(ad);
+  }
+
+  //POST SERVICE FOR HELP ADS
+  Future<void> addHelpAdToFireStore(
+      String _title,
+      String _petsType,
+      String _ownerName,
+      String _communicationNumber,
+      String _detailedDescription,
+      String _petsGender,
+      String _petsBreed,
+      String shareDate,
+      String location) async {
+    Map<String, dynamic> ad = Map();
+    ad['Title'] = _title;
+    ad['Pet\'s Type'] = _petsType;
+    ad['Owner'] = _ownerName;
+    ad['Communication Number'] = _communicationNumber;
+    ad['Detailed Description'] = _detailedDescription;
+    ad['Pet\'s Gender'] = _petsGender;
+    ad['Pet\'s Breed'] = _petsBreed;
+    ad['Date'] = shareDate;
+    ad['Location'] = location;
+    _instance.collection("Mating Ads").add(ad);
+  }
+
+  //POST SERVICE FOR FORUM TOPICS
+  Future<void> addForumTopicToFireStore(
+      String _title,
+      String _petsType,
+      String _petsAge,
+      String _diseaseInfo,
+      String _ownerName,
+      String _detailedDescription,
+      String _petsBreed,
+      String _communicationNumber,
+      String _petsGender,
+      String shareDate,
+      List comments) async {
+    Map<String, dynamic> ad = Map();
+    ad['Title'] = _title;
+    ad['Pet\'s Type'] = _petsType;
+    ad['Pet\'s Age'] = _petsAge;
+    ad['Owner'] = _ownerName;
+    ad['Communication Number'] = _communicationNumber;
+    ad['Disease'] = _diseaseInfo;
+    ad['Detailed Description'] = _detailedDescription;
+    ad['Pet\'s Gender'] = _petsGender;
+    ad['Pet\'s Breed'] = _petsBreed;
+    ad['Date'] = shareDate;
+    ad['Comments'] = comments;
+    _instance.collection("Forum Questions").add(ad);
+  }
+
   //POST MOCK DATAS FOR TEST TO FIREBASE
   Future<void> addTestDatasToFirebase(
       String communicationNumber,

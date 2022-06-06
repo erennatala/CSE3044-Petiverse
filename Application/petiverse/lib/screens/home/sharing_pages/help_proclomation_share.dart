@@ -6,8 +6,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:petiverse/model/adoption_proclomation_model.dart';
+import 'package:petiverse/model/help_proclomation_model.dart';
 import 'package:petiverse/model/user_model.dart';
 import 'package:petiverse/screens/account/sign_in_page.dart';
+import 'package:petiverse/screens/home/main_page.dart';
 import 'package:petiverse/screens/other/terms_and_conditions.dart';
 import 'package:petiverse/services/back_end.dart';
 import 'package:petiverse/utilities/white_appbar.dart';
@@ -26,38 +29,37 @@ class HelpProclomationShare extends StatefulWidget {
 }
 
 class _HelpProclomationShareState extends State<HelpProclomationShare> {
-  bool _permissionIsTrue = false;
-  bool _agreementsIsTrue = false;
-  bool _isHidden = true;
-
-  Icon _hideIcon = Icon(
-    Entypo.eye,
-    color: Colors.black,
-    size: 18,
-  );
   final _formKey = GlobalKey<FormState>();
 // user provided info for account creating page
-  String _name = '';
-  String _email = '';
-  String _password = '';
-  late UserModel user;
-  String DOB = '19700101';
-  String _gender = '';
-  int val = -1;
-  DateTime selectedDate = DateTime.now();
+  String _title = '';
+  String _detailedDescription = '';
+  String _petsAge = '';
+  String _petsType = '';
+  String _petsBreed = '';
+  String _diseaseInfo = '';
+  String _ownerName = '';
+  String _petsGender = '';
+  String _communicationNumber = '';
+  String location = '';
+  String shareDate = DateTime.now().toString();
+  late HelpProclomationModel ad;
 
   @override
   void initState() {
     super.initState();
-    user = UserModel(
-      email: _email,
-      password: _password,
-      name: _name,
-      dateOfBirth: DOB,
-      permissionsChecked: _permissionIsTrue,
-      agreementsChecked: _agreementsIsTrue,
-    );
+    ad = HelpProclomationModel(
+        _title,
+        _petsType,
+        _ownerName,
+        _communicationNumber,
+        _detailedDescription,
+        _petsGender,
+        _petsBreed,
+        shareDate.toString(),
+        location);
   }
+
+  int val = -1;
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +81,7 @@ class _HelpProclomationShareState extends State<HelpProclomationShare> {
                     EdgeInsets.only(left: width * 0.04, top: height * 0.01),
                 child: RichText(
                     text: TextSpan(
-                  text: 'Create an Account',
+                  text: 'Share A Help Ad',
                   style: GoogleFonts.roboto(
                       fontWeight: FontWeight.w900,
                       fontSize: 32 * height * 0.0013,
@@ -106,7 +108,7 @@ class _HelpProclomationShareState extends State<HelpProclomationShare> {
                           ),
                           child: RichText(
                             text: TextSpan(
-                              text: 'Name',
+                              text: 'Title',
                               style: GoogleFonts.roboto(
                                 fontSize: 16 * height * 0.0013,
                                 fontWeight: FontWeight.w400,
@@ -121,16 +123,15 @@ class _HelpProclomationShareState extends State<HelpProclomationShare> {
                               horizontal: width * 0.03,
                               vertical: height * 0.002),
                           child: TextFormField(
-                            validator: (_name) {
-                              if (_name!.length < 2) {
-                                return "Your name should be consist of at least 2 character";
+                            validator: (_title) {
+                              if (_title!.length < 3) {
+                                return "Title should be consist of at least 3 character";
                               } else {
                                 return null;
                               }
                             },
                             onSaved: (value) {
-                              _name = value!;
-                              print('name: ' + _name);
+                              _title = value!;
                             },
                             decoration: InputDecoration(
                                 focusedBorder: OutlineInputBorder(
@@ -145,12 +146,105 @@ class _HelpProclomationShareState extends State<HelpProclomationShare> {
                                   borderSide: BorderSide(width: 0.8),
                                   borderRadius: BorderRadius.circular(10),
                                 ),
-                                hintText: 'Enter your name',
+                                hintText: 'Enter a title',
+                                hintStyle:
+                                    TextStyle(fontSize: 16 * height * 0.0013)),
+                          ),
+                        ),
+                        Container(
+                          width: double.infinity,
+                          alignment: Alignment.topLeft,
+                          padding: EdgeInsets.only(
+                            top: height * 0.02,
+                            bottom: height * 0.01,
+                            left: width * 0.03,
+                            right: width * 0.03,
+                          ),
+                          child: RichText(
+                            text: TextSpan(
+                              text: 'Detailed Description',
+                              style: GoogleFonts.roboto(
+                                fontSize: 16 * height * 0.0013,
+                                fontWeight: FontWeight.w400,
+                                color: Colors.black,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Container(
+                          height: height * 0.065,
+                          padding: EdgeInsets.symmetric(
+                              horizontal: width * 0.03,
+                              vertical: height * 0.002),
+                          child: TextFormField(
+                            onSaved: (value) {
+                              _detailedDescription = value!;
+                            },
+                            decoration: InputDecoration(
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(width: 0.8),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(width: 0.8),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                disabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(width: 0.8),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                hintText: 'Enter description',
                                 hintStyle:
                                     TextStyle(fontSize: 16 * height * 0.0013)),
                           ),
                         ),
                       ],
+                    ),
+                    Container(
+                      width: double.infinity,
+                      alignment: Alignment.topLeft,
+                      padding: EdgeInsets.only(
+                        top: height * 0.02,
+                        bottom: height * 0.01,
+                        left: width * 0.03,
+                        right: width * 0.03,
+                      ),
+                      child: RichText(
+                        text: TextSpan(
+                          text: 'Location',
+                          style: GoogleFonts.roboto(
+                            fontSize: 16 * height * 0.0013,
+                            fontWeight: FontWeight.w400,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      height: height * 0.065,
+                      padding: EdgeInsets.symmetric(
+                          horizontal: width * 0.03, vertical: height * 0.002),
+                      child: TextFormField(
+                        onSaved: (value) {
+                          location = value!;
+                        },
+                        decoration: InputDecoration(
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(width: 0.8),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(width: 0.8),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            disabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(width: 0.8),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            hintText: 'Enter the location info',
+                            hintStyle:
+                                TextStyle(fontSize: 16 * height * 0.0013)),
+                      ),
                     ),
                     Column(
                       children: [
@@ -165,7 +259,7 @@ class _HelpProclomationShareState extends State<HelpProclomationShare> {
                           ),
                           child: RichText(
                             text: TextSpan(
-                              text: 'E-mail Address',
+                              text: 'Pet\'s Type',
                               style: GoogleFonts.roboto(
                                 fontSize: 16 * height * 0.0013,
                                 fontWeight: FontWeight.w400,
@@ -179,17 +273,9 @@ class _HelpProclomationShareState extends State<HelpProclomationShare> {
                           padding:
                               EdgeInsets.symmetric(horizontal: width * 0.03),
                           child: TextFormField(
-                            validator: (email) {
-                              if (!EmailValidator.validate(email!)) {
-                                return 'Please enter a valid email.';
-                              } else {
-                                return null;
-                              }
-                            },
                             keyboardType: TextInputType.emailAddress,
                             onSaved: (value) {
-                              _email = value!;
-                              print('email: ' + _email);
+                              _petsType = value!;
                             },
                             decoration: InputDecoration(
                                 focusedBorder: OutlineInputBorder(
@@ -204,7 +290,7 @@ class _HelpProclomationShareState extends State<HelpProclomationShare> {
                                   borderSide: BorderSide(width: 0.8),
                                   borderRadius: BorderRadius.circular(10),
                                 ),
-                                hintText: 'Enter your email',
+                                hintText: 'Write the pet type',
                                 hintStyle:
                                     TextStyle(fontSize: 16 * height * 0.0013)),
                           ),
@@ -224,7 +310,7 @@ class _HelpProclomationShareState extends State<HelpProclomationShare> {
                           ),
                           child: RichText(
                             text: TextSpan(
-                              text: 'Password',
+                              text: 'Pet\'s Breed',
                               style: GoogleFonts.roboto(
                                 fontSize: 16 * height * 0.0013,
                                 fontWeight: FontWeight.w400,
@@ -238,80 +324,29 @@ class _HelpProclomationShareState extends State<HelpProclomationShare> {
                           padding:
                               EdgeInsets.symmetric(horizontal: width * 0.03),
                           child: TextFormField(
-                            obscureText: _isHidden,
-                            validator: (pass) {
-                              // TODO: implement a complex password validation mechanism
-                              if (pass!.length < 6) {
-                                return 'Password must be at least 6 characters long.';
-                              } else {
-                                return null;
-                              }
-                            },
+                            keyboardType: TextInputType.emailAddress,
                             onSaved: (value) {
-                              _password = value!;
-                              print('password: ' + _password);
+                              _petsType = value!;
                             },
                             decoration: InputDecoration(
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(width: 0.8),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(width: 0.8),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              disabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(width: 0.8),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              suffixIcon: IconButton(
-                                onPressed: () {
-                                  setState(() {
-                                    _isHidden = !_isHidden;
-                                    _hideIcon = _isHidden
-                                        ? Icon(
-                                            Entypo.eye,
-                                            color: Colors.black,
-                                            size: 18,
-                                          )
-                                        : Icon(
-                                            Entypo.eye_with_line,
-                                            color: Colors.black,
-                                            size: 18,
-                                          );
-                                  });
-                                },
-                                icon: _hideIcon,
-                                splashRadius: 10,
-                              ),
-                              hintText: 'Enter your password.',
-                            ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(width: 0.8),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(width: 0.8),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                disabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(width: 0.8),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                hintText: 'Write the pet breed',
+                                hintStyle:
+                                    TextStyle(fontSize: 16 * height * 0.0013)),
                           ),
                         ),
                       ],
-                    ),
-                    Container(
-                      padding: EdgeInsets.only(
-                          left: width * 0.04, top: height * 0.02),
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        'Birth Date',
-                        style: TextStyle(
-                          fontSize: 16 * height * 0.0013,
-                          fontWeight: FontWeight.w400,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ),
-                    Container(
-                      height: 75,
-                      child: CupertinoDatePicker(
-                        mode: CupertinoDatePickerMode.date,
-                        initialDateTime: DateTime(1969, 1, 1),
-                        onDateTimeChanged: (DateTime newDateTime) {
-                          DOB = "$newDateTime";
-                        },
-                      ),
                     ),
                     Container(
                       padding: EdgeInsets.only(
@@ -339,7 +374,7 @@ class _HelpProclomationShareState extends State<HelpProclomationShare> {
                                   // bad way to close the keyboard
                                   FocusScope.of(context).unfocus();
                                   val = value as int;
-                                  _gender = "Male";
+                                  _petsGender = "Male";
                                 });
                               },
                               activeColor: Color(0xffff203468),
@@ -364,7 +399,7 @@ class _HelpProclomationShareState extends State<HelpProclomationShare> {
                                 FocusScope.of(context).unfocus();
                                 setState(() {
                                   val = value as int;
-                                  _gender = "Female";
+                                  _petsGender = "Female";
                                 });
                               },
                               activeColor: Color.fromARGB(255, 118, 5, 101),
@@ -381,9 +416,97 @@ class _HelpProclomationShareState extends State<HelpProclomationShare> {
                         ),
                       ],
                     ),
-                    permissionSwitchButton(width, height),
-                    agreementSwitchButton(width, height),
                   ],
+                ),
+              ),
+              Container(
+                width: double.infinity,
+                alignment: Alignment.topLeft,
+                padding: EdgeInsets.only(
+                  top: height * 0.02,
+                  bottom: height * 0.01,
+                  left: width * 0.03,
+                  right: width * 0.03,
+                ),
+                child: RichText(
+                  text: TextSpan(
+                    text: 'Your Name',
+                    style: GoogleFonts.roboto(
+                      fontSize: 16 * height * 0.0013,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.black,
+                    ),
+                  ),
+                ),
+              ),
+              Container(
+                height: height * 0.065,
+                padding: EdgeInsets.symmetric(
+                    horizontal: width * 0.03, vertical: height * 0.002),
+                child: TextFormField(
+                  onSaved: (value) {
+                    _ownerName = value!;
+                  },
+                  decoration: InputDecoration(
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(width: 0.8),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(width: 0.8),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      disabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(width: 0.8),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      hintText: 'Enter your name',
+                      hintStyle: TextStyle(fontSize: 16 * height * 0.0013)),
+                ),
+              ),
+              Container(
+                width: double.infinity,
+                alignment: Alignment.topLeft,
+                padding: EdgeInsets.only(
+                  top: height * 0.02,
+                  bottom: height * 0.01,
+                  left: width * 0.03,
+                  right: width * 0.03,
+                ),
+                child: RichText(
+                  text: TextSpan(
+                    text: 'Phone Number',
+                    style: GoogleFonts.roboto(
+                      fontSize: 16 * height * 0.0013,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.black,
+                    ),
+                  ),
+                ),
+              ),
+              Container(
+                height: height * 0.065,
+                padding: EdgeInsets.symmetric(
+                    horizontal: width * 0.03, vertical: height * 0.002),
+                child: TextFormField(
+                  onSaved: (value) {
+                    _communicationNumber = value!;
+                  },
+                  decoration: InputDecoration(
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(width: 0.8),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(width: 0.8),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      disabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(width: 0.8),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      hintText: 'Enter your communication number',
+                      hintStyle: TextStyle(fontSize: 16 * height * 0.0013)),
                 ),
               ),
               Container(
@@ -395,32 +518,23 @@ class _HelpProclomationShareState extends State<HelpProclomationShare> {
                 height: height * 0.1,
                 child: ElevatedButton(
                   onPressed: () {
-                    bool _validate = _formKey.currentState!.validate();
-                    if (_validate) {
-                      _formKey.currentState!.save();
-                      // check if user has agreed on policy and gave the permission
-                      if (_agreementsIsTrue && _permissionIsTrue) {
-                        // if so then create the user
-
-                      }
-                      // TO DO : DONT LET THE USER TO SIGN UP IF HE/SHE IS YOUNGER THAN 18
-                      BackEndServices().addUserDocumentToFireStore(
-                          _name, _email, _gender, DOB);
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        content: const Text(
-                            'Your account has been created, check your mail box for confirmation e-mail.'),
-                        backgroundColor: Colors.green,
-                      ));
-
-                      Navigator.pushReplacement(
-                          context,
-                          CupertinoPageRoute(
-                              builder: (context) => const SignInPage()));
-                    }
+                    BackEndServices().addAdoptionAdToFireStore(
+                        _title,
+                        _detailedDescription,
+                        _petsAge,
+                        _petsType,
+                        _petsBreed,
+                        _diseaseInfo,
+                        _ownerName,
+                        _petsGender,
+                        _communicationNumber,
+                        shareDate);
+                    Navigator.pushReplacement(context,
+                        CupertinoPageRoute(builder: (context) => MainPage()));
                   },
                   child: RichText(
                     text: TextSpan(
-                      text: 'Get Started',
+                      text: 'Share',
                       style: GoogleFonts.roboto(
                         fontSize: 24 * height * 0.0013,
                         fontWeight: FontWeight.w500,
@@ -461,13 +575,6 @@ class _HelpProclomationShareState extends State<HelpProclomationShare> {
           padding: EdgeInsets.only(left: width * 0.03, top: height * 0.01),
           child: Row(
             children: [
-              CupertinoSwitch(
-                  value: _permissionIsTrue,
-                  onChanged: (value) {
-                    setState(() {
-                      _permissionIsTrue = !_permissionIsTrue;
-                    });
-                  }),
               Container(
                 padding: EdgeInsets.only(left: width * 0.03),
                 width: width * 0.75,
@@ -504,13 +611,6 @@ class _HelpProclomationShareState extends State<HelpProclomationShare> {
           padding: EdgeInsets.only(left: width * 0.03, top: height * 0.01),
           child: Row(
             children: [
-              CupertinoSwitch(
-                  value: _agreementsIsTrue,
-                  onChanged: (value) {
-                    setState(() {
-                      _agreementsIsTrue = !_agreementsIsTrue;
-                    });
-                  }),
               Expanded(
                 child: Container(
                   padding: EdgeInsets.only(left: width * 0.03),
