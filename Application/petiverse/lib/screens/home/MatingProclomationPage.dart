@@ -66,7 +66,8 @@ class MatingProclamationPageState extends State<MatingProclamationPage> {
                 Container(
                   child: Image.asset(
                     'assets/images/petiverse-logo.png',
-                    height: 40,
+                    height: 100,
+                    width: 200,
                   ),
                 ),
                 Container(
@@ -97,7 +98,6 @@ class MatingProclamationPageState extends State<MatingProclamationPage> {
                       leading: ClipRRect(
                         child: const Text("Image"),
                       ),
-                      trailing: Text("sasa"),
                       onTap: () {
                         Navigator.push(
                           context,

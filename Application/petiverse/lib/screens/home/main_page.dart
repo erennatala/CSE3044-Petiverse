@@ -27,13 +27,13 @@ class _MainPageState extends State<MainPage> {
 
   PageController pageController = PageController();
   List<Color> colors = [
-    const Color(0xff28346c),
     const Color(0xFFEB5644),
+    const Color(0xff28346c),
     const Color(0xFF37bff0),
     const Color(0xFFc4cc22),
     Color.fromARGB(255, 69, 3, 74),
   ];
-  Color _backgroundColor = Color(0xFFEB5644);
+  Color _backgroundColor = const Color(0xff28346c);
 
   fetchFileData() async {
     adoptionAds = await BackEndServices().getAdoptionAdsFromFirebase();

@@ -64,7 +64,8 @@ class HelpProclamationPageState extends State<HelpProclamationPage> {
                 Container(
                   child: Image.asset(
                     'assets/images/petiverse-logo.png',
-                    height: 40,
+                    height: 100,
+                    width: 200,
                   ),
                 ),
                 Container(
@@ -95,7 +96,6 @@ class HelpProclamationPageState extends State<HelpProclamationPage> {
                       leading: ClipRRect(
                         child: const Text("Image"),
                       ),
-                      trailing: Text("sasa"),
                       onTap: () {
                         Navigator.push(
                           context,

@@ -68,7 +68,8 @@ class AdoptionProclamationPageState extends State<AdoptionProclamationPage> {
                 Container(
                   child: Image.asset(
                     'assets/images/petiverse-logo.png',
-                    height: 40,
+                    height: 100,
+                    width: 200,
                   ),
                 ),
                 Container(
@@ -99,7 +100,6 @@ class AdoptionProclamationPageState extends State<AdoptionProclamationPage> {
                       leading: ClipRRect(
                         child: const Text("Image"),
                       ),
-                      trailing: Text("sasa"),
                       onTap: () {
                         Navigator.push(
                           context,

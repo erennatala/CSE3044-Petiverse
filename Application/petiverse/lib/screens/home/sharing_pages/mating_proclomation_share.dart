@@ -326,7 +326,7 @@ class _MatingProclomationShareState extends State<MatingProclomationShare> {
                           child: TextFormField(
                             keyboardType: TextInputType.emailAddress,
                             onSaved: (value) {
-                              _petsType = value!;
+                              _petsBreed = value!;
                             },
                             decoration: InputDecoration(
                                 focusedBorder: OutlineInputBorder(
@@ -375,6 +375,7 @@ class _MatingProclomationShareState extends State<MatingProclomationShare> {
                           padding:
                               EdgeInsets.symmetric(horizontal: width * 0.03),
                           child: TextFormField(
+                            keyboardType: TextInputType.emailAddress,
                             onSaved: (value) {
                               _petsAge = value!;
                             },
@@ -465,99 +466,104 @@ class _MatingProclomationShareState extends State<MatingProclomationShare> {
                         ),
                       ],
                     ),
+                    Container(
+                      width: double.infinity,
+                      alignment: Alignment.topLeft,
+                      padding: EdgeInsets.only(
+                        top: height * 0.02,
+                        bottom: height * 0.01,
+                        left: width * 0.03,
+                        right: width * 0.03,
+                      ),
+                      child: RichText(
+                        text: TextSpan(
+                          text: 'Your Name',
+                          style: GoogleFonts.roboto(
+                            fontSize: 16 * height * 0.0013,
+                            fontWeight: FontWeight.w400,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      height: height * 0.065,
+                      padding: EdgeInsets.symmetric(
+                          horizontal: width * 0.03, vertical: height * 0.002),
+                      child: TextFormField(
+                        keyboardType: TextInputType.emailAddress,
+                        onSaved: (value) {
+                          _ownerName = value!;
+                        },
+                        decoration: InputDecoration(
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(width: 0.8),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(width: 0.8),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            disabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(width: 0.8),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            hintText: 'Enter your name',
+                            hintStyle:
+                                TextStyle(fontSize: 16 * height * 0.0013)),
+                      ),
+                    ),
+                    Container(
+                      width: double.infinity,
+                      alignment: Alignment.topLeft,
+                      padding: EdgeInsets.only(
+                        top: height * 0.02,
+                        bottom: height * 0.01,
+                        left: width * 0.03,
+                        right: width * 0.03,
+                      ),
+                      child: RichText(
+                        text: TextSpan(
+                          text: 'Phone Number',
+                          style: GoogleFonts.roboto(
+                            fontSize: 16 * height * 0.0013,
+                            fontWeight: FontWeight.w400,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      height: height * 0.065,
+                      padding: EdgeInsets.symmetric(
+                          horizontal: width * 0.03, vertical: height * 0.002),
+                      child: TextFormField(
+                        keyboardType: TextInputType.emailAddress,
+                        onSaved: (value) {
+                          _communicationNumber = value!;
+                        },
+                        decoration: InputDecoration(
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(width: 0.8),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(width: 0.8),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            disabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(width: 0.8),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            hintText: 'Enter your communication number',
+                            hintStyle:
+                                TextStyle(fontSize: 16 * height * 0.0013)),
+                      ),
+                    ),
                   ],
                 ),
               ),
-              Container(
-                width: double.infinity,
-                alignment: Alignment.topLeft,
-                padding: EdgeInsets.only(
-                  top: height * 0.02,
-                  bottom: height * 0.01,
-                  left: width * 0.03,
-                  right: width * 0.03,
-                ),
-                child: RichText(
-                  text: TextSpan(
-                    text: 'Your Name',
-                    style: GoogleFonts.roboto(
-                      fontSize: 16 * height * 0.0013,
-                      fontWeight: FontWeight.w400,
-                      color: Colors.black,
-                    ),
-                  ),
-                ),
-              ),
-              Container(
-                height: height * 0.065,
-                padding: EdgeInsets.symmetric(
-                    horizontal: width * 0.03, vertical: height * 0.002),
-                child: TextFormField(
-                  onSaved: (value) {
-                    _ownerName = value!;
-                  },
-                  decoration: InputDecoration(
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(width: 0.8),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(width: 0.8),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      disabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(width: 0.8),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      hintText: 'Enter your name',
-                      hintStyle: TextStyle(fontSize: 16 * height * 0.0013)),
-                ),
-              ),
-              Container(
-                width: double.infinity,
-                alignment: Alignment.topLeft,
-                padding: EdgeInsets.only(
-                  top: height * 0.02,
-                  bottom: height * 0.01,
-                  left: width * 0.03,
-                  right: width * 0.03,
-                ),
-                child: RichText(
-                  text: TextSpan(
-                    text: 'Phone Number',
-                    style: GoogleFonts.roboto(
-                      fontSize: 16 * height * 0.0013,
-                      fontWeight: FontWeight.w400,
-                      color: Colors.black,
-                    ),
-                  ),
-                ),
-              ),
-              Container(
-                height: height * 0.065,
-                padding: EdgeInsets.symmetric(
-                    horizontal: width * 0.03, vertical: height * 0.002),
-                child: TextFormField(
-                  onSaved: (value) {
-                    _communicationNumber = value!;
-                  },
-                  decoration: InputDecoration(
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(width: 0.8),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(width: 0.8),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      disabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(width: 0.8),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      hintText: 'Enter your communication number',
-                      hintStyle: TextStyle(fontSize: 16 * height * 0.0013)),
-                ),
-              ),
+
               Container(
                 padding: EdgeInsets.only(
                     top: height * 0.04,
@@ -566,8 +572,10 @@ class _MatingProclomationShareState extends State<MatingProclomationShare> {
                 width: double.infinity,
                 height: height * 0.1,
                 child: ElevatedButton(
-                  onPressed: () {
-                    BackEndServices().addMatingAdToFireStore(
+                  onPressed: () async {
+                    bool _validate = _formKey.currentState!.validate();
+                    if (_validate) _formKey.currentState!.save();
+                    await BackEndServices().addMatingAdToFireStore(
                         _title,
                         _detailedDescription,
                         _petsAge,
@@ -602,97 +610,6 @@ class _MatingProclomationShareState extends State<MatingProclomationShare> {
           ),
         ),
       ),
-    );
-  }
-
-  Column permissionSwitchButton(double width, double height) {
-    return Column(
-      children: [
-        Container(
-          width: double.infinity,
-          padding: EdgeInsets.only(left: width * 0.04, top: height * 0.01),
-          child: RichText(
-              text: TextSpan(
-            text: 'Permissions',
-            style: GoogleFonts.roboto(
-                fontWeight: FontWeight.w400,
-                fontSize: 18 * height * 0.0013,
-                color: Color(0xFF2C2E4A)),
-          )),
-        ),
-        Container(
-          padding: EdgeInsets.only(left: width * 0.03, top: height * 0.01),
-          child: Row(
-            children: [
-              Container(
-                padding: EdgeInsets.only(left: width * 0.03),
-                width: width * 0.75,
-                child: RichText(
-                    textAlign: TextAlign.start,
-                    text: TextSpan(
-                        text:
-                            "Iʼd like to receive Petiverse newsletters and stay up-to-date.",
-                        style: GoogleFonts.roboto(color: Colors.black))),
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-
-  Column agreementSwitchButton(double width, double height) {
-    return Column(
-      children: [
-        Container(
-          width: double.infinity,
-          padding: EdgeInsets.only(left: width * 0.04, top: height * 0.03),
-          child: RichText(
-              text: TextSpan(
-            text: 'Agreements',
-            style: GoogleFonts.roboto(
-                fontWeight: FontWeight.w400,
-                fontSize: 18 * height * 0.0013,
-                color: Color(0xFF2C2E4A)),
-          )),
-        ),
-        Container(
-          padding: EdgeInsets.only(left: width * 0.03, top: height * 0.01),
-          child: Row(
-            children: [
-              Expanded(
-                child: Container(
-                  padding: EdgeInsets.only(left: width * 0.03),
-                  child: Wrap(
-                    children: [
-                      RichText(
-                          text: TextSpan(children: [
-                        TextSpan(
-                            text: 'I agree to the ',
-                            style: GoogleFonts.roboto(color: Colors.black)),
-                        TextSpan(
-                            text: 'terms and conditions and privacy policy.',
-                            style: GoogleFonts.roboto(color: Colors.blue),
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () {
-                                print('object');
-                                Navigator.push(
-                                  context,
-                                  CupertinoPageRoute(
-                                    builder: (context) =>
-                                        TermsAndConditionsPage(),
-                                  ),
-                                );
-                              }),
-                      ]))
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
     );
   }
 }

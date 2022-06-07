@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:petiverse/screens/home/ForumPage.dart';
 import 'package:petiverse/screens/home/main_page.dart';
 
+import 'forum_quesion_comment.dart';
+
 class ForumQuestionDetailPage extends StatefulWidget {
   final selectedQuestion;
   const ForumQuestionDetailPage({Key? key, required this.selectedQuestion})
@@ -211,7 +213,38 @@ class _ForumQuestionDetailPageState extends State<ForumQuestionDetailPage> {
                     ),
                   ),
                   Container(
-                    padding: EdgeInsets.only(top: height * 0.08),
+                    child: Center(
+                      child: ElevatedButton(
+                        child: RichText(
+                            textAlign: TextAlign.center,
+                            text: const TextSpan(
+                              text: "See the comments",
+                            )),
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              CupertinoPageRoute(
+                                  builder: (context) =>
+                                      ForumQuestionCommentPage(
+                                        name: 'temp',
+                                        selectedQuestion:
+                                            widget.selectedQuestion,
+                                        Comments:
+                                            widget.selectedQuestion.comments,
+                                      )));
+                        },
+                        style: ElevatedButton.styleFrom(
+                          primary: Color.fromARGB(255, 118, 5, 101),
+                          minimumSize: Size(width * 0.9, 58 * height * 0.0013),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    padding: EdgeInsets.only(top: height * 0.03),
                     child: Center(
                       child: ElevatedButton(
                         child: RichText(

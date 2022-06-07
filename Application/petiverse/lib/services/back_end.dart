@@ -1,6 +1,9 @@
-import 'package:firebase_core/firebase_core.dart';
+import 'dart:io';
+
+import 'package:firebase_core/firebase_core.dart' as firebase_core;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 class BackEndServices {
   FirebaseFirestore _instance = FirebaseFirestore.instance;
@@ -125,7 +128,7 @@ class BackEndServices {
     ad['Pet\'s Breed'] = _petsBreed;
     ad['Date'] = shareDate;
     ad['Location'] = location;
-    _instance.collection("Mating Ads").add(ad);
+    _instance.collection("Help Ads").add(ad);
   }
 
   //POST SERVICE FOR FORUM TOPICS
@@ -153,7 +156,7 @@ class BackEndServices {
     ad['Pet\'s Breed'] = _petsBreed;
     ad['Date'] = shareDate;
     ad['Comments'] = comments;
-    _instance.collection("Forum Questions").add(ad);
+    _instance.collection("Forum Questions").doc(_title).set(ad);
   }
 
   //POST MOCK DATAS FOR TEST TO FIREBASE
@@ -182,5 +185,19 @@ class BackEndServices {
     mockData['Date'] = date;
     mockData['Comments'] = comments;
     _instance.collection("Forum Questions").add(mockData);
+  }
+
+  final firebase_storage.FirebaseStorage storage =
+      firebase_storage.FirebaseStorage.instance;
+
+  //UPLOAD PHOTO TO FIREBASE STORAGE
+  Future<void> uploadImage(String filePath, String fileName) async {
+    File file = File(filePath);
+    try {
+      await storage.ref('selam/$fileName').putFile(file);
+    } on firebase_core.FirebaseException catch (e) {
+      print(e);
+    }
+    ;
   }
 }

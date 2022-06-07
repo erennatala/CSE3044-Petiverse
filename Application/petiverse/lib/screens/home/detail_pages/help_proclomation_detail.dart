@@ -127,6 +127,29 @@ class _HelpProclomationDetailPageState
                       ],
                     ),
                   ),
+                  Padding(
+                    padding: EdgeInsets.only(
+                      bottom: height * 0.01,
+                      left: width * 0.02,
+                      right: width * 0.2,
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.only(left: width * 0.01),
+                          child: Text(
+                            'Location | ' +
+                                widget.selectedProclomation.location,
+                            style: TextStyle(
+                              color: Colors.grey.shade500,
+                              fontSize: 16,
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
                   Container(
                     width: width * 0.95,
                     padding: EdgeInsets.only(

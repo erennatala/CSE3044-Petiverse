@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:email_validator/email_validator.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -97,6 +98,48 @@ class _AdoptionProclomationShareState extends State<AdoptionProclomationShare> {
                   children: [
                     Column(
                       children: [
+                        Container(
+                          padding: EdgeInsets.only(
+                              top: height * 0.04,
+                              left: width * 0.03,
+                              right: width * 0.03),
+                          width: double.infinity,
+                          height: height * 0.1,
+                          child: ElevatedButton(
+                            onPressed: () async {
+                              final selectedImage = await FilePicker.platform
+                                  .pickFiles(
+                                      allowMultiple: false,
+                                      type: FileType.custom,
+                                      allowedExtensions: ['png', 'jpg']);
+                              if (selectedImage == null) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                        content: Text(
+                                            "Please choose a png of jpg to upload")));
+                              }
+                              final path = selectedImage?.files.single.path;
+                              final fileName = _title;
+                              await BackEndServices()
+                                  .uploadImage(path!, fileName);
+                            },
+                            child: RichText(
+                              text: TextSpan(
+                                text: 'Upload Photo',
+                                style: GoogleFonts.roboto(
+                                  fontSize: 24 * height * 0.0013,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ),
+                            style: ElevatedButton.styleFrom(
+                              primary: Color.fromARGB(255, 118, 5, 101),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                            ),
+                          ),
+                        ),
                         Container(
                           width: double.infinity,
                           alignment: Alignment.topLeft,
@@ -326,7 +369,7 @@ class _AdoptionProclomationShareState extends State<AdoptionProclomationShare> {
                           child: TextFormField(
                             keyboardType: TextInputType.emailAddress,
                             onSaved: (value) {
-                              _petsType = value!;
+                              _petsBreed = value!;
                             },
                             decoration: InputDecoration(
                                 focusedBorder: OutlineInputBorder(
@@ -375,6 +418,7 @@ class _AdoptionProclomationShareState extends State<AdoptionProclomationShare> {
                           padding:
                               EdgeInsets.symmetric(horizontal: width * 0.03),
                           child: TextFormField(
+                            keyboardType: TextInputType.emailAddress,
                             onSaved: (value) {
                               _petsAge = value!;
                             },
@@ -465,99 +509,110 @@ class _AdoptionProclomationShareState extends State<AdoptionProclomationShare> {
                         ),
                       ],
                     ),
+                    Column(
+                      children: [
+                        Container(
+                          width: double.infinity,
+                          alignment: Alignment.topLeft,
+                          padding: EdgeInsets.only(
+                            top: height * 0.02,
+                            bottom: height * 0.01,
+                            left: width * 0.03,
+                            right: width * 0.03,
+                          ),
+                          child: RichText(
+                            text: TextSpan(
+                              text: 'Your Name',
+                              style: GoogleFonts.roboto(
+                                fontSize: 16 * height * 0.0013,
+                                fontWeight: FontWeight.w400,
+                                color: Colors.black,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Container(
+                          height: height * 0.065,
+                          padding:
+                              EdgeInsets.symmetric(horizontal: width * 0.03),
+                          child: TextFormField(
+                            keyboardType: TextInputType.emailAddress,
+                            onSaved: (value) {
+                              _ownerName = value!;
+                            },
+                            decoration: InputDecoration(
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(width: 0.8),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(width: 0.8),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              disabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(width: 0.8),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              hintText: 'Your Name',
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        Container(
+                          width: double.infinity,
+                          alignment: Alignment.topLeft,
+                          padding: EdgeInsets.only(
+                            top: height * 0.02,
+                            bottom: height * 0.01,
+                            left: width * 0.03,
+                            right: width * 0.03,
+                          ),
+                          child: RichText(
+                            text: TextSpan(
+                              text: 'Phone Number',
+                              style: GoogleFonts.roboto(
+                                fontSize: 16 * height * 0.0013,
+                                fontWeight: FontWeight.w400,
+                                color: Colors.black,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Container(
+                          height: height * 0.065,
+                          padding:
+                              EdgeInsets.symmetric(horizontal: width * 0.03),
+                          child: TextFormField(
+                            keyboardType: TextInputType.emailAddress,
+                            onSaved: (value) {
+                              _communicationNumber = value!;
+                            },
+                            decoration: InputDecoration(
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(width: 0.8),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(width: 0.8),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              disabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(width: 0.8),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              hintText: 'Phone Number',
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ],
                 ),
               ),
-              Container(
-                width: double.infinity,
-                alignment: Alignment.topLeft,
-                padding: EdgeInsets.only(
-                  top: height * 0.02,
-                  bottom: height * 0.01,
-                  left: width * 0.03,
-                  right: width * 0.03,
-                ),
-                child: RichText(
-                  text: TextSpan(
-                    text: 'Your Name',
-                    style: GoogleFonts.roboto(
-                      fontSize: 16 * height * 0.0013,
-                      fontWeight: FontWeight.w400,
-                      color: Colors.black,
-                    ),
-                  ),
-                ),
-              ),
-              Container(
-                height: height * 0.065,
-                padding: EdgeInsets.symmetric(
-                    horizontal: width * 0.03, vertical: height * 0.002),
-                child: TextFormField(
-                  onSaved: (value) {
-                    _ownerName = value!;
-                  },
-                  decoration: InputDecoration(
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(width: 0.8),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(width: 0.8),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      disabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(width: 0.8),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      hintText: 'Enter your name',
-                      hintStyle: TextStyle(fontSize: 16 * height * 0.0013)),
-                ),
-              ),
-              Container(
-                width: double.infinity,
-                alignment: Alignment.topLeft,
-                padding: EdgeInsets.only(
-                  top: height * 0.02,
-                  bottom: height * 0.01,
-                  left: width * 0.03,
-                  right: width * 0.03,
-                ),
-                child: RichText(
-                  text: TextSpan(
-                    text: 'Phone Number',
-                    style: GoogleFonts.roboto(
-                      fontSize: 16 * height * 0.0013,
-                      fontWeight: FontWeight.w400,
-                      color: Colors.black,
-                    ),
-                  ),
-                ),
-              ),
-              Container(
-                height: height * 0.065,
-                padding: EdgeInsets.symmetric(
-                    horizontal: width * 0.03, vertical: height * 0.002),
-                child: TextFormField(
-                  onSaved: (value) {
-                    _communicationNumber = value!;
-                  },
-                  decoration: InputDecoration(
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(width: 0.8),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(width: 0.8),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      disabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(width: 0.8),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      hintText: 'Enter your communication number',
-                      hintStyle: TextStyle(fontSize: 16 * height * 0.0013)),
-                ),
-              ),
+
               Container(
                 padding: EdgeInsets.only(
                     top: height * 0.04,
@@ -566,8 +621,10 @@ class _AdoptionProclomationShareState extends State<AdoptionProclomationShare> {
                 width: double.infinity,
                 height: height * 0.1,
                 child: ElevatedButton(
-                  onPressed: () {
-                    BackEndServices().addAdoptionAdToFireStore(
+                  onPressed: () async {
+                    bool _validate = _formKey.currentState!.validate();
+                    if (_validate) _formKey.currentState!.save();
+                    await BackEndServices().addAdoptionAdToFireStore(
                         _title,
                         _detailedDescription,
                         _petsAge,
@@ -602,97 +659,6 @@ class _AdoptionProclomationShareState extends State<AdoptionProclomationShare> {
           ),
         ),
       ),
-    );
-  }
-
-  Column permissionSwitchButton(double width, double height) {
-    return Column(
-      children: [
-        Container(
-          width: double.infinity,
-          padding: EdgeInsets.only(left: width * 0.04, top: height * 0.01),
-          child: RichText(
-              text: TextSpan(
-            text: 'Permissions',
-            style: GoogleFonts.roboto(
-                fontWeight: FontWeight.w400,
-                fontSize: 18 * height * 0.0013,
-                color: Color(0xFF2C2E4A)),
-          )),
-        ),
-        Container(
-          padding: EdgeInsets.only(left: width * 0.03, top: height * 0.01),
-          child: Row(
-            children: [
-              Container(
-                padding: EdgeInsets.only(left: width * 0.03),
-                width: width * 0.75,
-                child: RichText(
-                    textAlign: TextAlign.start,
-                    text: TextSpan(
-                        text:
-                            "Iʼd like to receive Petiverse newsletters and stay up-to-date.",
-                        style: GoogleFonts.roboto(color: Colors.black))),
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-
-  Column agreementSwitchButton(double width, double height) {
-    return Column(
-      children: [
-        Container(
-          width: double.infinity,
-          padding: EdgeInsets.only(left: width * 0.04, top: height * 0.03),
-          child: RichText(
-              text: TextSpan(
-            text: 'Agreements',
-            style: GoogleFonts.roboto(
-                fontWeight: FontWeight.w400,
-                fontSize: 18 * height * 0.0013,
-                color: Color(0xFF2C2E4A)),
-          )),
-        ),
-        Container(
-          padding: EdgeInsets.only(left: width * 0.03, top: height * 0.01),
-          child: Row(
-            children: [
-              Expanded(
-                child: Container(
-                  padding: EdgeInsets.only(left: width * 0.03),
-                  child: Wrap(
-                    children: [
-                      RichText(
-                          text: TextSpan(children: [
-                        TextSpan(
-                            text: 'I agree to the ',
-                            style: GoogleFonts.roboto(color: Colors.black)),
-                        TextSpan(
-                            text: 'terms and conditions and privacy policy.',
-                            style: GoogleFonts.roboto(color: Colors.blue),
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () {
-                                print('object');
-                                Navigator.push(
-                                  context,
-                                  CupertinoPageRoute(
-                                    builder: (context) =>
-                                        TermsAndConditionsPage(),
-                                  ),
-                                );
-                              }),
-                      ]))
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
     );
   }
 }
