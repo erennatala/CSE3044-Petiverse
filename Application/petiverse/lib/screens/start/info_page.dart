@@ -39,15 +39,15 @@ class _InfoPageState extends State<InfoPage> {
                 GeneralInfoPage(
                   'assets/images/adopt.png',
                   'Adopt',
-                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+                  'You can find new homes for your little friends, or adopt new pets.',
                   Color(0xFFEB5644),
                   height,
                   width,
                 ),
                 GeneralInfoPage(
                   'assets/images/find-friend.png',
-                  'Find Friends For Your Pet',
-                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+                  'Mating',
+                  'Evcil hayvanlarınıza yeni arkadaşlar edindirebilir, daha mutlu olmasını sağlayabilirsiniz.',
                   Color(0xFF37bff0),
                   height,
                   width,
@@ -55,7 +55,7 @@ class _InfoPageState extends State<InfoPage> {
                 GeneralInfoPage(
                   'assets/images/help-ad.png',
                   'Help the animals in need',
-                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+                  'You can open aid advertisements for stray animals that you see in an emergency, and save the lives of our little friends.',
                   Color.fromARGB(255, 112, 4, 129),
                   height,
                   width,

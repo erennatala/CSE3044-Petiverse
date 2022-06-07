@@ -26,7 +26,7 @@ class BackEndServices {
   //GET SERVICE FOR ADOPTION ADS
   Future<List> getAdoptionAdsFromFirebase() async {
     CollectionReference col = _instance.collection('Adoption Ads');
-    QuerySnapshot snapshot = await col.get();
+    QuerySnapshot snapshot = await col.orderBy('Date', descending: true).get();
     final allAdoptionAds = snapshot.docs.map((doc) => doc.data()).toList();
     return allAdoptionAds;
   }
@@ -34,7 +34,7 @@ class BackEndServices {
   //GET SERVICE FOR MATING ADS
   Future<List> getMatingAdsFromFirebase() async {
     CollectionReference col = _instance.collection('Mating Ads');
-    QuerySnapshot snapshot = await col.get();
+    QuerySnapshot snapshot = await col.orderBy('Date', descending: true).get();
     final allMatingAds = snapshot.docs.map((doc) => doc.data()).toList();
     return allMatingAds;
   }
@@ -42,7 +42,7 @@ class BackEndServices {
   //GET SERVICE FOR HELP ADS
   Future<List> getHelpAdsFromFirebase() async {
     CollectionReference col = _instance.collection('Help Ads');
-    QuerySnapshot snapshot = await col.get();
+    QuerySnapshot snapshot = await col.orderBy('Date', descending: true).get();
     final allHelpAds = snapshot.docs.map((doc) => doc.data()).toList();
     return allHelpAds;
   }
@@ -50,9 +50,18 @@ class BackEndServices {
   //GET SERVICE FOR FORUM QUESTIONS
   Future<List> getForumQuestionsFromFirebase() async {
     CollectionReference col = _instance.collection('Forum Questions');
-    QuerySnapshot snapshot = await col.get();
+    QuerySnapshot snapshot = await col.orderBy('Date', descending: true).get();
     final allForumQuestions = snapshot.docs.map((doc) => doc.data()).toList();
     return allForumQuestions;
+  }
+
+  //GET SERVICE FOR USER
+  Object? getUserFromFirebase(String email) async {
+    CollectionReference col = _instance.collection('users');
+    QuerySnapshot snapshot = await col.get();
+    DocumentSnapshot user = await col.doc(email).get();
+
+    return user;
   }
 
   //POST SERVICE FOR ADOPTION ADS
@@ -194,7 +203,7 @@ class BackEndServices {
   Future<void> uploadImage(String filePath, String fileName) async {
     File file = File(filePath);
     try {
-      await storage.ref('selam/$fileName').putFile(file);
+      await storage.ref('$fileName').putFile(file);
     } on firebase_core.FirebaseException catch (e) {
       print(e);
     }

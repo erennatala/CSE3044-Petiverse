@@ -7,8 +7,7 @@ import 'package:petiverse/screens/account/sign_in_page.dart';
 import 'package:petiverse/services/back_end.dart';
 
 class Profile extends StatefulWidget {
-  final String name;
-  const Profile({Key? key, required this.name}) : super(key: key);
+  const Profile({Key? key}) : super(key: key);
 
   @override
   State<Profile> createState() => _ProfileState();
