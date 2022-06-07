@@ -149,9 +149,7 @@ class NavigationDrawer extends StatelessWidget {
         Navigator.push(
           context,
           CupertinoPageRoute(
-            builder: (context) => Profile(
-              name: _name,
-            ),
+            builder: (context) => Profile(),
           ),
         );
         break;

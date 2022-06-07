@@ -94,7 +94,7 @@ class MatingProclamationPageState extends State<MatingProclamationPage> {
             children: allMatingProclomations
                 .map((MatingProclomationModel e) => ListTile(
                       title: Text(e.title),
-                      subtitle: Text(e.petType),
+                      subtitle: Text(e.petBreed),
                       leading: ClipRRect(
                         child: const Text("Image"),
                       ),

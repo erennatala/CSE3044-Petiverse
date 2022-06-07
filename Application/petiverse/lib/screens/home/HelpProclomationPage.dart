@@ -92,7 +92,7 @@ class HelpProclamationPageState extends State<HelpProclamationPage> {
             children: allHelpProclomations
                 .map((HelpProclomationModel e) => ListTile(
                       title: Text(e.title),
-                      subtitle: Text(e.petType),
+                      subtitle: Text(e.petBreed),
                       leading: ClipRRect(
                         child: const Text("Image"),
                       ),

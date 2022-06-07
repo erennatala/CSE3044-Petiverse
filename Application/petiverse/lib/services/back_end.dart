@@ -55,6 +55,15 @@ class BackEndServices {
     return allForumQuestions;
   }
 
+  //GET SERVICE FOR USER
+  Object? getUserFromFirebase(String email) async {
+    CollectionReference col = _instance.collection('users');
+    QuerySnapshot snapshot = await col.get();
+    DocumentSnapshot user = await col.doc(email).get();
+
+    return user;
+  }
+
   //POST SERVICE FOR ADOPTION ADS
   Future<void> addAdoptionAdToFireStore(
       String _title,

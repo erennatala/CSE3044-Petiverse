@@ -95,7 +95,7 @@ class ForumPageState extends State<ForumPage> {
             children: allForumQuestions
                 .map((ForumModel e) => ListTile(
                       title: Text(e.title),
-                      subtitle: Text(e.petType),
+                      subtitle: Text(e.petBreed),
                       leading: ClipRRect(
                         child: const Text("Image"),
                       ),
