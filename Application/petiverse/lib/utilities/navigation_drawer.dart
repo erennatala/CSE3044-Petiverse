@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:petiverse/screens/account/sign_in_page.dart';
 import 'package:petiverse/screens/other/contact_us.dart';
 import 'package:petiverse/screens/other/legal.dart';
 import 'package:petiverse/screens/other/profile/profile.dart';
@@ -77,7 +78,12 @@ class NavigationDrawer extends StatelessWidget {
               const SizedBox(height: 50),
               GestureDetector(
                 onTap: () {
-                  //Sign out the user.
+                  Navigator.push(
+                    context,
+                    CupertinoPageRoute(
+                      builder: (context) => SignInPage(),
+                    ),
+                  );
                 },
                 child: Container(
                   alignment: Alignment.center,

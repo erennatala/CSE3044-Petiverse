@@ -33,7 +33,7 @@ class _MainPageState extends State<MainPage> {
     const Color(0xFFc4cc22),
     Color.fromARGB(255, 69, 3, 74),
   ];
-  Color _backgroundColor = const Color(0xff28346c);
+  Color _backgroundColor = const Color(0xFFEB5644);
 
   fetchFileData() async {
     adoptionAds = await BackEndServices().getAdoptionAdsFromFirebase();
@@ -110,7 +110,7 @@ class _MainPageState extends State<MainPage> {
                         child: Padding(
                           padding: EdgeInsets.all(5),
                           child: Padding(
-                            padding: EdgeInsets.fromLTRB(0, 1, 3, 1),
+                            padding: EdgeInsets.fromLTRB(0, 4, 3, 1),
                             child: GestureDetector(
                               onTap: () {
                                 Scaffold.of(context).openDrawer();
@@ -127,7 +127,8 @@ class _MainPageState extends State<MainPage> {
                       Container(
                         child: Image.asset(
                           'assets/images/petiverse-logo.png',
-                          height: 40,
+                          height: 100,
+                          width: 200,
                         ),
                       ),
                       Container(
@@ -137,11 +138,6 @@ class _MainPageState extends State<MainPage> {
                         ),
                         child: Padding(
                           padding: EdgeInsets.all(6),
-                          child: Icon(
-                            Icons.search,
-                            size: 40,
-                            color: Colors.blue.shade900,
-                          ),
                         ),
                       ),
                     ],

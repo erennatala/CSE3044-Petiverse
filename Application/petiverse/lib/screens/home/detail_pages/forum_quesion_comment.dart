@@ -81,11 +81,6 @@ class ForumQuestionCommentPageState extends State<ForumQuestionCommentPage> {
                   ),
                   child: Padding(
                     padding: EdgeInsets.all(6),
-                    child: Icon(
-                      Icons.search,
-                      size: 40,
-                      color: Colors.blue.shade900,
-                    ),
                   ),
                 ),
               ],
