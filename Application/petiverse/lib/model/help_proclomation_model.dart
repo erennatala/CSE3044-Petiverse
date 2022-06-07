@@ -7,7 +7,6 @@ class HelpProclomationModel {
   final String petGender;
   final String petBreed;
   final String date;
-  final String name;
   final String location;
   HelpProclomationModel(
       this.title,
@@ -18,6 +17,5 @@ class HelpProclomationModel {
       this.petGender,
       this.petBreed,
       this.date,
-      this.name,
       this.location);
 }

@@ -1,5 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:petiverse/model/forum_model.dart';
+import 'package:petiverse/screens/home/detail_pages/forum_question_detail.dart';
 
 class ForumPage extends StatefulWidget {
   final List forumQuestions;
@@ -18,24 +20,99 @@ class ForumPageState extends State<ForumPage> {
         (index) => ForumModel(
             widget.forumQuestions[index]['Title'],
             widget.forumQuestions[index]['Pet\'s Type'],
+            widget.forumQuestions[index]['Pet\'s Age'],
+            widget.forumQuestions[index]['Disease'],
             widget.forumQuestions[index]['Owner'],
             widget.forumQuestions[index]['Detailed Description'],
             widget.forumQuestions[index]['Pet\'s Breed'],
+            widget.forumQuestions[index]['Communication Number'],
+            widget.forumQuestions[index]['Pet\'s Gender'],
             widget.forumQuestions[index]['Date'],
-            widget.forumQuestions[index]['Category']));
+            widget.forumQuestions[index]['Comments']));
     return Scaffold(
-      body: ListView(
-        children: allForumQuestions
-            .map((ForumModel e) => ListTile(
-                  title: Text(e.title),
-                  subtitle: Text(e.category),
-                  leading: ClipRRect(
-                    child: const Text("Image"),
+      body: Column(children: [
+        SafeArea(
+          child: Container(
+            margin: EdgeInsets.only(
+              left: MediaQuery.of(context).size.width * 0.02,
+              right: MediaQuery.of(context).size.width * 0.02,
+              top: MediaQuery.of(context).size.height * 0.01,
+              bottom: MediaQuery.of(context).size.height * 0.01,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(7),
+                    color: Colors.grey.shade200,
                   ),
-                  trailing: Text("sasa"),
-                ))
-            .toList(),
-      ),
+                  child: Padding(
+                    padding: EdgeInsets.all(5),
+                    child: Padding(
+                      padding: EdgeInsets.fromLTRB(0, 4, 3, 1),
+                      child: GestureDetector(
+                        onTap: () {
+                          Scaffold.of(context).openDrawer();
+                        },
+                        child: Icon(
+                          Icons.list,
+                          size: 40,
+                          color: Colors.blue.shade900,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Container(
+                  child: Image.asset(
+                    'assets/images/petiverse-logo.png',
+                    height: 100,
+                    width: 200,
+                  ),
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(7),
+                    color: Colors.grey.shade200,
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.all(6),
+                    child: Icon(
+                      Icons.search,
+                      size: 40,
+                      color: Colors.blue.shade900,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        Expanded(
+          child: ListView(
+            padding: EdgeInsets.all(0),
+            children: allForumQuestions
+                .map((ForumModel e) => ListTile(
+                      title: Text(e.title),
+                      subtitle: Text(e.petType),
+                      leading: ClipRRect(
+                        child: const Text("Image"),
+                      ),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          CupertinoPageRoute(
+                            builder: (context) =>
+                                ForumQuestionDetailPage(selectedQuestion: e),
+                          ),
+                        );
+                      },
+                    ))
+                .toList(),
+          ),
+        )
+      ]),
     );
   }
 }

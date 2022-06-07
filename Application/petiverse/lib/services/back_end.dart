@@ -1,6 +1,9 @@
-import 'package:firebase_core/firebase_core.dart';
+import 'dart:io';
+
+import 'package:firebase_core/firebase_core.dart' as firebase_core;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 class BackEndServices {
   FirebaseFirestore _instance = FirebaseFirestore.instance;
@@ -8,15 +11,15 @@ class BackEndServices {
   //SAVE USER TO FIREBASE
   Future<void> addUserDocumentToFireStore(
       String name, String email, String gender, String DOB) async {
-    Map<String, dynamic> userInfoJSON = Map();
-    userInfoJSON['Name'] = name;
-    userInfoJSON['E-mail'] = email;
-    userInfoJSON['Gender'] = gender;
-    userInfoJSON['Birth Date'] = DOB;
+    Map<String, dynamic> mockData = Map();
+    mockData['Name'] = name;
+    mockData['E-mail'] = email;
+    mockData['Gender'] = gender;
+    mockData['Birth Date'] = DOB;
     _instance
         .collection("users")
         .doc(email)
-        .set(userInfoJSON)
+        .set(mockData)
         .then((v) => print("User data is added to firestore"));
   }
 
@@ -52,6 +55,110 @@ class BackEndServices {
     return allForumQuestions;
   }
 
+  //POST SERVICE FOR ADOPTION ADS
+  Future<void> addAdoptionAdToFireStore(
+      String _title,
+      String _detailedDescription,
+      String _petsAge,
+      String _petsType,
+      String _petsBreed,
+      String _diseaseInfo,
+      String _ownerName,
+      String _petsGender,
+      String _communicationNumber,
+      String shareDate) async {
+    Map<String, dynamic> ad = Map();
+    ad['Title'] = _title;
+    ad['Pet\'s Type'] = _petsType;
+    ad['Pet\'s Age'] = _petsAge;
+    ad['Owner'] = _ownerName;
+    ad['Communication Number'] = _communicationNumber;
+    ad['Disease'] = _diseaseInfo;
+    ad['Detailed Description'] = _detailedDescription;
+    ad['Pet\'s Gender'] = _petsGender;
+    ad['Pet\'s Breed'] = _petsBreed;
+    ad['Date'] = shareDate;
+    _instance.collection("Adoption Ads").add(ad);
+  }
+
+  //POST SERVICE FOR MATING ADS
+  Future<void> addMatingAdToFireStore(
+      String _title,
+      String _detailedDescription,
+      String _petsAge,
+      String _petsType,
+      String _petsBreed,
+      String _diseaseInfo,
+      String _ownerName,
+      String _petsGender,
+      String _communicationNumber,
+      String shareDate) async {
+    Map<String, dynamic> ad = Map();
+    ad['Title'] = _title;
+    ad['Pet\'s Type'] = _petsType;
+    ad['Pet\'s Age'] = _petsAge;
+    ad['Owner'] = _ownerName;
+    ad['Communication Number'] = _communicationNumber;
+    ad['Disease'] = _diseaseInfo;
+    ad['Detailed Description'] = _detailedDescription;
+    ad['Pet\'s Gender'] = _petsGender;
+    ad['Pet\'s Breed'] = _petsBreed;
+    ad['Date'] = shareDate;
+    _instance.collection("Mating Ads").add(ad);
+  }
+
+  //POST SERVICE FOR HELP ADS
+  Future<void> addHelpAdToFireStore(
+      String _title,
+      String _petsType,
+      String _ownerName,
+      String _communicationNumber,
+      String _detailedDescription,
+      String _petsGender,
+      String _petsBreed,
+      String shareDate,
+      String location) async {
+    Map<String, dynamic> ad = Map();
+    ad['Title'] = _title;
+    ad['Pet\'s Type'] = _petsType;
+    ad['Owner'] = _ownerName;
+    ad['Communication Number'] = _communicationNumber;
+    ad['Detailed Description'] = _detailedDescription;
+    ad['Pet\'s Gender'] = _petsGender;
+    ad['Pet\'s Breed'] = _petsBreed;
+    ad['Date'] = shareDate;
+    ad['Location'] = location;
+    _instance.collection("Help Ads").add(ad);
+  }
+
+  //POST SERVICE FOR FORUM TOPICS
+  Future<void> addForumTopicToFireStore(
+      String _title,
+      String _petsType,
+      String _petsAge,
+      String _diseaseInfo,
+      String _ownerName,
+      String _detailedDescription,
+      String _petsBreed,
+      String _communicationNumber,
+      String _petsGender,
+      String shareDate,
+      List comments) async {
+    Map<String, dynamic> ad = Map();
+    ad['Title'] = _title;
+    ad['Pet\'s Type'] = _petsType;
+    ad['Pet\'s Age'] = _petsAge;
+    ad['Owner'] = _ownerName;
+    ad['Communication Number'] = _communicationNumber;
+    ad['Disease'] = _diseaseInfo;
+    ad['Detailed Description'] = _detailedDescription;
+    ad['Pet\'s Gender'] = _petsGender;
+    ad['Pet\'s Breed'] = _petsBreed;
+    ad['Date'] = shareDate;
+    ad['Comments'] = comments;
+    _instance.collection("Forum Questions").doc(_title).set(ad);
+  }
+
   //POST MOCK DATAS FOR TEST TO FIREBASE
   Future<void> addTestDatasToFirebase(
       String communicationNumber,
@@ -63,18 +170,34 @@ class BackEndServices {
       String petsBreed,
       String petsGender,
       String title,
-      String owner) async {
-    Map<String, dynamic> userInfoJSON = Map();
-    userInfoJSON['Title'] = title;
-    userInfoJSON['Pet\'s Type'] = petsType;
-    userInfoJSON['Pet\'s Age'] = petsAge;
-    userInfoJSON['Owner'] = owner;
-    userInfoJSON['Communication Number'] = communicationNumber;
-    userInfoJSON['Disease'] = disease;
-    userInfoJSON['Detailed Description'] = detailedDescription;
-    userInfoJSON['Pet\'s Gender'] = petsGender;
-    userInfoJSON['Pet\'s Breed'] = petsBreed;
-    userInfoJSON['Date'] = date;
-    _instance.collection("Forum Questions").add(userInfoJSON);
+      String owner,
+      List comments) async {
+    Map<String, dynamic> mockData = Map();
+    mockData['Title'] = title;
+    mockData['Pet\'s Type'] = petsType;
+    mockData['Pet\'s Age'] = petsAge;
+    mockData['Owner'] = owner;
+    mockData['Communication Number'] = communicationNumber;
+    mockData['Disease'] = disease;
+    mockData['Detailed Description'] = detailedDescription;
+    mockData['Pet\'s Gender'] = petsGender;
+    mockData['Pet\'s Breed'] = petsBreed;
+    mockData['Date'] = date;
+    mockData['Comments'] = comments;
+    _instance.collection("Forum Questions").add(mockData);
+  }
+
+  final firebase_storage.FirebaseStorage storage =
+      firebase_storage.FirebaseStorage.instance;
+
+  //UPLOAD PHOTO TO FIREBASE STORAGE
+  Future<void> uploadImage(String filePath, String fileName) async {
+    File file = File(filePath);
+    try {
+      await storage.ref('selam/$fileName').putFile(file);
+    } on firebase_core.FirebaseException catch (e) {
+      print(e);
+    }
+    ;
   }
 }
