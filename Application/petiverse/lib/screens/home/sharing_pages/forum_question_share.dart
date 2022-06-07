@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:email_validator/email_validator.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -90,6 +91,7 @@ class _ForumQuestionShareState extends State<ForumQuestionShare> {
                       color: Color(0xFF2C2E4A)),
                 )),
               ),
+
               // WRAPPED THE INPUT FIELDS WITH FORM WIDGET SO WE CAN USE VALIDATION AND OTHER INPUT RELATED FUNCTIONS
               Form(
                 // validate input when user taps on next or submit button
@@ -99,6 +101,48 @@ class _ForumQuestionShareState extends State<ForumQuestionShare> {
                   children: [
                     Column(
                       children: [
+                        Container(
+                          padding: EdgeInsets.only(
+                              top: height * 0.04,
+                              left: width * 0.03,
+                              right: width * 0.03),
+                          width: double.infinity,
+                          height: height * 0.1,
+                          child: ElevatedButton(
+                            onPressed: () async {
+                              final selectedImage = await FilePicker.platform
+                                  .pickFiles(
+                                      allowMultiple: false,
+                                      type: FileType.custom,
+                                      allowedExtensions: ['png', 'jpg']);
+                              if (selectedImage == null) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                        content: Text(
+                                            "Please choose a png of jpg to upload")));
+                              }
+                              final path = selectedImage?.files.single.path;
+                              final fileName = _title;
+                              await BackEndServices()
+                                  .uploadImage(path!, fileName);
+                            },
+                            child: RichText(
+                              text: TextSpan(
+                                text: 'Upload Photo',
+                                style: GoogleFonts.roboto(
+                                  fontSize: 24 * height * 0.0013,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ),
+                            style: ElevatedButton.styleFrom(
+                              primary: Color.fromARGB(255, 118, 5, 101),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                            ),
+                          ),
+                        ),
                         Container(
                           width: double.infinity,
                           alignment: Alignment.topLeft,
